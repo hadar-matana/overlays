@@ -2,10 +2,15 @@ import { useMemo, useState } from 'react';
 import Panel from '@/components/atlas-base/Panel';
 import { Expander } from '@/components/atlas-base/Expander';
 import { FilterChip } from '@/components/atlas-base/FilterChip';
+import { PrimaryActionButton } from '@/components/atlas-base/primary-action-button';
 import { Select } from '@/components/atlas-base/Select';
 import { TabSelect } from '@/components/atlas-base/TabSelect';
+import { ResultFirst } from '@/components/atlas-base/result-first';
+import { ResultSecond } from '@/components/atlas-base/result-second';
+import { ResultThird } from '@/components/atlas-base/result-third';
 
 type TimeOption = '1' | '2' | '3';
+type PeriodOption = 'day' | 'week' | 'vacation';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -18,21 +23,43 @@ export const BasicPanel = () => {
     [],
   );
 
+  const periodOptions = useMemo(
+    () => [
+      { value: 'day' as PeriodOption, label: 'יום' },
+      { value: 'week' as PeriodOption, label: 'שבוע' },
+      { value: 'vacation' as PeriodOption, label: 'חופש' },
+    ],
+    [],
+  );
+
   const resultTabs = useMemo(
     () => [
-      { value: 'first' as ResultTab, label: 'ראשון' },
-      { value: 'second' as ResultTab, label: 'שני' },
-      { value: 'third' as ResultTab, label: 'שלישי' },
+      {
+        value: 'first' as ResultTab,
+        label: 'ראשון',
+        content: <ResultFirst />,
+      },
+      {
+        value: 'second' as ResultTab,
+        label: 'שני',
+        content: <ResultSecond />,
+      },
+      {
+        value: 'third' as ResultTab,
+        label: 'שלישי',
+        content: <ResultThird />,
+      },
     ],
     [],
   );
 
   const [selectedTime, setSelectedTime] = useState<TimeOption>('1');
+  const [selectedPeriod, setSelectedPeriod] = useState<PeriodOption>('day');
   const [activeResult, setActiveResult] = useState<ResultTab>('first');
 
   return (
     <Panel>
-      <div className="flex w-full flex-col gap-4" dir="rtl">
+      <div className="flex h-full w-full flex-col gap-4" dir="rtl">
         <Expander
           className="gap-0"
           itemClassName="rounded-none"
@@ -54,12 +81,20 @@ export const BasicPanel = () => {
                       header: 'זמנים',
                       content: (
                         <div className="flex items-center justify-between gap-3">
-                          <FilterChip variant="ghost">זמן אוחר</FilterChip>
+                          <FilterChip variant="ghost">זמן אחר</FilterChip>
                           <Select
                             value={selectedTime}
                             onChange={(value) => setSelectedTime(value as TimeOption)}
                             options={timeOptions}
                             fullWidth={false}
+                            className="w-[100px]"
+                          />
+                          <Select
+                            value={selectedPeriod}
+                            onChange={(value) => setSelectedPeriod(value as PeriodOption)}
+                            options={periodOptions}
+                            fullWidth={false}
+                            className="w-[100px]"
                           />
                         </div>
                       ),
@@ -90,6 +125,11 @@ export const BasicPanel = () => {
             },
           ]}
         />
+        <div className="mt-auto flex justify-end">
+          <PrimaryActionButton type="button">
+            חפש
+          </PrimaryActionButton>
+        </div>
       </div>
     </Panel>
   );

@@ -1,24 +1,37 @@
+import type { ReactNode } from 'react';
+
+import { Button } from '@zohan/ui/components/button';
 import { cn } from '../../lib/utils';
 
+type FilterChipVariant = 'filled' | 'ghost';
+
 type FilterChipProps = {
-  children: React.ReactNode;
-  variant?: 'filled' | 'ghost';
+  children: ReactNode;
+  variant?: FilterChipVariant;
   className?: string;
 };
 
 export function FilterChip({ children, variant = 'filled', className }: FilterChipProps) {
+  const baseClasses =
+    'h-6 min-w-[80px] rounded-[4px] border px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0';
+  const variantClasses: Record<FilterChipVariant, string> = {
+    filled: 'border-[#26292F] bg-[#26292F] hover:border-white/30 hover:bg-[#26292F]',
+    ghost: 'border-transparent bg-transparent text-white hover:border-transparent hover:bg-transparent hover:text-white',
+  };
+
   return (
-    <button
+    <Button
       dir="rtl"
+      variant="ghost"
+      size="sm"
       className={cn(
-        'inline-flex h-6 min-w-[134px] items-center justify-center rounded-[4px] border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25',
-        variant === 'filled'
-          ? 'border-[#26292F] bg-[#26292F] text-white hover:border-white/30'
-          : 'border-transparent bg-transparent text-white',
+        'focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+        baseClasses,
+        variantClasses[variant],
         className,
       )}
     >
       {children}
-    </button>
+    </Button>
   );
 }

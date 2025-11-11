@@ -1,6 +1,10 @@
 import * as React from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
-import { ChevronDown } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@zohan/ui/components/accordion';
 import { cn } from '../../lib/utils';
 
 export type ExpanderItem = {
@@ -52,36 +56,26 @@ export function Expander({
 
   return (
     <ExpanderDepthContext.Provider value={depth + 1}>
-      <Accordion.Root
-        dir="rtl"
-        type="single"
-        collapsible
-        className={cn('flex w-full flex-col gap-2', className)}
-      >
+      <Accordion dir="rtl" type="single" collapsible className={cn('flex w-full flex-col gap-2', className)}>
         {items.map(({ id, header, content }) => (
-          <Accordion.Item
+          <AccordionItem
             key={id}
             value={id}
             className={cn('overflow-hidden rounded-[12px] bg-transparent', itemClassName)}
           >
-            <Accordion.Header dir="rtl">
-              <Accordion.Trigger
-                dir="rtl"
-                className={cn(
-                  'group flex w-full items-center justify-between rounded-[12px] min-h-[22px]',
-                  'text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25',
-                  'flex-row-reverse', // header on right, chevron on left
-                  textByDepth,
-                  paddingByDepth,
-                  triggerClassName,
-                )}
-              >
-                <div className="text-right">{header}</div>
-                <ChevronDown className="size-4 shrink-0 stroke-[1.5] text-white/80 transition-transform duration-300 ease-out group-data-[state=closed]:-rotate-90 group-data-[state=open]:rotate-0" />
-              </Accordion.Trigger>
-            </Accordion.Header>
+            <AccordionTrigger
+              className={cn(
+                'min-h-[22px] rounded-[12px] text-white/90 focus-visible:ring-white/25 focus-visible:ring-offset-0',
+                '[&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:stroke-[1.5] [&>svg]:text-white/80 [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-out',
+                textByDepth,
+                paddingByDepth,
+                triggerClassName,
+              )}
+            >
+              {header}
+            </AccordionTrigger>
 
-            <Accordion.Content
+            <AccordionContent
               className={cn(
                 'text-sm text-white/70 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
                 contentPadByDepth,
@@ -89,10 +83,10 @@ export function Expander({
               )}
             >
               <div className="border-t border-white/10 pt-3">{content}</div>
-            </Accordion.Content>
-          </Accordion.Item>
+            </AccordionContent>
+          </AccordionItem>
         ))}
-      </Accordion.Root>
+      </Accordion>
     </ExpanderDepthContext.Provider>
   );
 }

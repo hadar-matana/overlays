@@ -1,6 +1,12 @@
 import '@fontsource/heebo/400.css';
-import * as Tabs from '@radix-ui/react-tabs';
 import type { ReactNode } from 'react';
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@zohan/ui/components/tabs';
 import { cn } from '../../lib/utils';
 
 export function TabSelect<T extends string>({
@@ -11,31 +17,31 @@ export function TabSelect<T extends string>({
 }: {
   value: T;
   onValueChange: (v: T) => void;
-  options: { value: T; label: ReactNode }[];
+  options: { value: T; label: ReactNode; content: ReactNode }[];
   className?: string;
 }) {
   return (
-    <Tabs.Root
+    <Tabs
       dir="rtl"
       value={value}
       onValueChange={(v) => onValueChange(v as T)}
       className="w-full"
     >
-      <Tabs.List
+      <TabsList
         className={cn(
-          'flex h-6 w-full overflow-hidden rounded-[4px] border border-[color:var(--line)] bg-[#26292F]',
+          'flex h-6 w-full overflow-hidden rounded-[4px] border border-[color:var(--line)] bg-[#26292F] p-0',
           className,
         )}
         // apply Heebo once at the list level
         style={{ fontFamily: 'Heebo, sans-serif' }}
       >
         {options.map((option) => (
-          <Tabs.Trigger
+          <TabsTrigger
             key={option.value}
             value={option.value}
             className={cn(
               // layout
-              'flex h-full flex-1 basis-0 items-center justify-center px-3 text-center',
+              'flex h-full flex-1 basis-0 items-center justify-center px-3 text-center bg-transparent',
               // typography (14/22, regular)
               'text-[14px] leading-[22px] font-normal tracking-[0]',
               // rounding per side in RTL
@@ -43,17 +49,24 @@ export function TabSelect<T extends string>({
               // colors + active state
               'text-[color:var(--ctl-muted)] data-[state=active]:text-[#1FC5A8]',
               // border driven by Radix active state (no inline styles needed)
-              'border border-transparent data-[state=active]:border-[#1FC5A8]',
-              // focus polish
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25',
+              'border border-transparent data-[state=active]:border-[#1FC5A8] data-[state=active]:!bg-transparent data-[state=active]:shadow-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
               // smooth color changes
               'transition-colors',
             )}
           >
             <span className="w-full text-center">{option.label}</span>
-          </Tabs.Trigger>
+          </TabsTrigger>
         ))}
-      </Tabs.List>
-    </Tabs.Root>
+      </TabsList>
+      {options.map((option) => (
+        <TabsContent
+          key={option.value}
+          value={option.value}
+          className="mt-3 w-full border border-[color:var(--line)] bg-[#26292F] p-4 text-right text-[14px] leading-[22px] text-white"
+        >
+          {option.content}
+        </TabsContent>
+      ))}
+    </Tabs>
   );
 }
