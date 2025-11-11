@@ -1,4 +1,6 @@
 @import './fonts.css';
+@import "@fontsource/heebo/400.css";
+@import "@fontsource/heebo/700.css";
 
 :root {
   --header-height: 64px;
