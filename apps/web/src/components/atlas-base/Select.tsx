@@ -16,7 +16,7 @@ type AtlasSelectProps = {
   options: SelectOption[];
   placeholder?: string;
   className?: string;
-  fullWidth?: boolean; // true = width: 100% (Figma says "Fill"); false = min width only (134px)
+  fullWidth?: boolean; 
 };
 
 export function Select({
@@ -28,9 +28,9 @@ export function Select({
   fullWidth = true,
 }: AtlasSelectProps) {
   // Figma tokens
-  const BG = '#26292F'; // colorBgContainer
-  const RADIUS = 'rounded-[4px]'; // border radius
-  const BORDER_IDLE = '#26292F'; // outlined idle
+  const BG = '#26292F'; 
+  const RADIUS = 'rounded-[4px]';
+  const BORDER_IDLE = '#26292F';
 
   const widthClass = fullWidth ? 'w-full' : 'min-w-[110px]';
   const classNameString = typeof className === 'string' ? className : '';
@@ -38,19 +38,18 @@ export function Select({
 
   const triggerClasses = cn(
     // layout
-    'flex h-6 items-center px-3', // Height 24px, small paddings
-    '[&>svg]:order-first [&>svg]:ml-0 [&>svg]:mr-2', // Move chevron to left with proper spacing
-    hasCustomWidth ? null : widthClass, // "Fill (134px)"
+    'flex h-6 items-center px-3', 
+    '[&>svg]:order-first [&>svg]:ml-0 [&>svg]:mr-2', 
+    hasCustomWidth ? null : widthClass, 
     // visuals
     RADIUS,
     'text-sm font-medium text-white',
     `bg-[${BG}]`,
-    `border border-[${BORDER_IDLE}]`, // outlined 1px
+    `border border-[${BORDER_IDLE}]`,
     // states
     'transition-colors',
-    'hover:border-white/30', // subtle hover (optional — remove if you don't want it)
-    'data-[state=open]:border-[#1FC5A8]', // active/open -> primary green border
-    // accessibility: remove default rings/outlines
+    'hover:border-white/30', 
+    'data-[state=open]:border-[#1FC5A8]', 
     'outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0',
     className,
   );
