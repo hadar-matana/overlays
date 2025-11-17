@@ -10,7 +10,7 @@ import { cn } from '../../lib/utils';
 export type ExpanderItem = {
   id: string;
   header: React.ReactNode;
-  content: React.ReactNode;
+  content?: React.ReactNode;
 };
 
 // Tracks how deeply nested this Expander is (0 = top)
@@ -75,15 +75,17 @@ export function Expander({
               {header}
             </AccordionTrigger>
 
-            <AccordionContent
-              className={cn(
-                'text-sm text-white/70 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-                contentPadByDepth,
-                contentClassName,
-              )}
-            >
-              <div className="border-t border-white/10 pt-3">{content}</div>
-            </AccordionContent>
+            {content && (
+              <AccordionContent
+                className={cn(
+                  'text-sm text-white/70 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+                  contentPadByDepth,
+                  contentClassName,
+                )}
+              >
+                <div className="border-t border-white/10 pt-3">{content}</div>
+              </AccordionContent>
+            )}
           </AccordionItem>
         ))}
       </Accordion>
