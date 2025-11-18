@@ -5,7 +5,7 @@ import { BasicPanel } from '@/components/basic-panel';
 export default function HomePage() {
   return (
     <div className="flex min-h-screen items-start justify-center bg-bg p-6 text-white">
-      <div className="flex flex-col items-stretch gap-0" dir="rtl" style={{ width: '300px' }}>
+      <div className="flex flex-col items-stretch gap-0" dir="rtl" style={{ width: '325px' }}>
         <header
           dir="ltr"
           className="flex h-11 items-center justify-between rounded-t-[8px] rounded-b-none bg-[#303142] px-2 text-white shadow-[0_12px_24px_rgba(0,0,0,0.18)]"

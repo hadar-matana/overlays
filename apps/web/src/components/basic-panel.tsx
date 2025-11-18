@@ -11,30 +11,14 @@ import { ResultThird } from '@/components/atlas-base/result-third';
 import { OverlayResult } from '@/components/atlas-base/overlay-result';
 import { mockOverlayResults, type OverlayResultItem } from '@/lib/mock-overlays';
 import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
-
+import { TimePicker } from './atlas-base/TimePicker';
+import moment from 'moment';
 type TimeOption = '1' | '2' | '3';
 type PeriodOption = 'day' | 'week' | 'vacation';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
-  const timeOptions = useMemo(
-    () => [
-      { value: '1' as TimeOption, label: '1' },
-      { value: '2' as TimeOption, label: '2' },
-      { value: '3' as TimeOption, label: '3' },
-    ],
-    [],
-  );
-
-  const periodOptions = useMemo(
-    () => [
-      { value: 'day' as PeriodOption, label: 'יום' },
-      { value: 'week' as PeriodOption, label: 'שבוע' },
-      { value: 'vacation' as PeriodOption, label: 'חופש' },
-    ],
-    [],
-  );
-
+  const [time, setTime] = useState<{ start: moment.Moment; end: moment.Moment }>({ from: moment(), to: moment() });
   const resultTabs = useMemo(
     () => [
       {
@@ -55,11 +39,7 @@ export const BasicPanel = () => {
     ],
     [],
   );
-
-  const [selectedTime, setSelectedTime] = useState<TimeOption>('1');
-  const [selectedPeriod, setSelectedPeriod] = useState<PeriodOption>('day');
   const [activeResult, setActiveResult] = useState<ResultTab>('first');
-  const [searchText, setSearchText] = useState('');
 
   const handleOverlayClick = (item: OverlayResultItem) => {
     // Stub for future ORPC call – replace once you know the API
@@ -83,7 +63,7 @@ export const BasicPanel = () => {
                 <div className="flex flex-col gap-3">
                   <TabSelect<ResultTab>
                     value={activeResult}
-                    onValueChange={(value) => setActiveResult(value)}
+                    onValueChange={value => setActiveResult(value)}
                     options={resultTabs}
                   />
 
@@ -97,27 +77,7 @@ export const BasicPanel = () => {
                         id: 'times',
                         header: 'זמנים',
                         content: (
-                          <div className="flex items-center justify-between gap-3">
-                            <FilterChip variant="ghost">זמן אחר</FilterChip>
-
-                            <Select
-                              value={selectedTime}
-                              onChange={(value) => setSelectedTime(value as TimeOption)}
-                              options={timeOptions}
-                              fullWidth={false}
-                              className="w-[88px]"
-                            />
-
-                            <Select
-                              value={selectedPeriod}
-                              onChange={(value) =>
-                                setSelectedPeriod(value as PeriodOption)
-                              }
-                              options={periodOptions}
-                              fullWidth={false}
-                              className="w-[112px]"
-                            />
-                          </div>
+                          <TimePicker className="w-full" time={time} setTime={setTime} defaultTimeMode="relative" />
                         ),
                       },
                     ]}
@@ -141,7 +101,7 @@ export const BasicPanel = () => {
               content: (
                 // horizontal dividers: colorBorderSecondary (#262626)
                 <div className="mt-1 divide-y-[1px] divide-[#262626]">
-                  {mockOverlayResults.map((item) => (
+                  {mockOverlayResults.map(item => (
                     <OverlayResult
                       key={item.id}
                       sensor={item.sensor}
