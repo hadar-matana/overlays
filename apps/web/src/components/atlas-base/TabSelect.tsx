@@ -1,12 +1,7 @@
 import '@fontsource/heebo/400.css';
 import type { ReactNode } from 'react';
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@zohan/ui/components/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@zohan/ui/components/tabs';
 import { cn } from '../../lib/utils';
 
 export function TabSelect<T extends string>({
@@ -21,12 +16,7 @@ export function TabSelect<T extends string>({
   className?: string;
 }) {
   return (
-    <Tabs
-      dir="rtl"
-      value={value}
-      onValueChange={(v) => onValueChange(v as T)}
-      className="w-full"
-    >
+    <Tabs dir="rtl" value={value} onValueChange={v => onValueChange(v as T)} className="w-full">
       <TabsList
         className={cn(
           'flex h-6 w-full overflow-hidden rounded-[4px] border border-[color:var(--line)] bg-[#26292F] p-0',
@@ -35,7 +25,7 @@ export function TabSelect<T extends string>({
         // apply Heebo once at the list level
         style={{ fontFamily: 'Heebo, sans-serif' }}
       >
-        {options.map((option) => (
+        {options.map(option => (
           <TabsTrigger
             key={option.value}
             value={option.value}
@@ -58,7 +48,7 @@ export function TabSelect<T extends string>({
           </TabsTrigger>
         ))}
       </TabsList>
-      {options.map((option) => (
+      {options.map(option => (
         <TabsContent
           key={option.value}
           value={option.value}
