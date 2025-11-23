@@ -45,11 +45,11 @@ const useTreeView = () => {
   return context;
 };
 
-const getAllDescendantLeafsIds = (node: TreeNode): string[] => {
+const getAllDescendantLeavesIds = (node: TreeNode): string[] => {
   const ids: string[] = !node.children ? [node.id] : [];
   if (node.children) {
     for (const child of node.children) {
-      ids.push(...getAllDescendantLeafsIds(child));
+      ids.push(...getAllDescendantLeavesIds(child));
     }
   }
   return ids;
@@ -160,7 +160,7 @@ const TreeNodeItem: FC<{ node: TreeNode; level: number; treeData: TreeNode[] }> 
         <div onClick={(e) => e.stopPropagation()} className="flex-shrink-0 flex items-center">
           <Checkbox
             indeterminate={checkboxState === CheckboxState.INDETERMINATE}
-            indeterminateColor='#1FC5A8'
+            indeterminateClass='bg-[#1FC5A8]'
             checked={checkboxState === CheckboxState.CHECKED}
             onCheckedChange={handleCheckboxCheckedChange}
             className="border-[#434343] bg-[#26292F] data-[state=checked]:bg-[#1FC5A8] data-[state=checked]:border-[#1FC5A8]"
@@ -172,10 +172,7 @@ const TreeNodeItem: FC<{ node: TreeNode; level: number; treeData: TreeNode[] }> 
         </div>
 
         <span
-          className={cn(
-            'text-sm truncate leading-none',
-            checkboxState === CheckboxState.CHECKED && 'font-medium'
-          )}
+          className='text-sm truncate leading-none'
         >
           {node.name}
         </span>
@@ -227,7 +224,7 @@ export const TreeView: FC<TreeViewProps> = ({
     
     calculateParentStates(sourceTree);
     return map;
-  }, [checkedIds]);
+  }, [checkedIds, sourceTree]);
 
   const toggleExpanded = useCallback((id: string) => {
     setExpandedItems(prev => {
@@ -248,14 +245,14 @@ export const TreeView: FC<TreeViewProps> = ({
     const currentState = checkedItems.get(node.id);
     const newCheckedState = currentState !== CheckboxState.CHECKED;
 
-    const descendantIds = getAllDescendantLeafsIds(node);
+    const descendantIds = getAllDescendantLeavesIds(node);
     
     if (newCheckedState) {
       addElementIds(descendantIds);
     } else {
       removeElementIds(descendantIds);
     }
-  }, [addElementIds, removeElementIds]);
+  }, [addElementIds, removeElementIds, checkedItems]);
 
   const treeContextValue: TreeViewContextType = useMemo(
     () => ({

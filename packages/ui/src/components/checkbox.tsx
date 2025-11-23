@@ -10,9 +10,9 @@ const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
     indeterminate?: boolean;
-    indeterminateColor?: string;
+    indeterminateClass?: string;
   }
->(({ className, indeterminate, indeterminateColor, ...props }, ref) => (
+>(({ className, indeterminate, indeterminateClass, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
@@ -28,7 +28,7 @@ const Checkbox = React.forwardRef<
     )}
     {indeterminate && (
       <div className="flex items-center justify-center h-full w-full">
-        <div className="w-2 h-2" style={{ backgroundColor: indeterminateColor }} />
+        <div className={cn("w-2 h-2", indeterminateClass)} />
       </div>
     )}
   </CheckboxPrimitive.Root>

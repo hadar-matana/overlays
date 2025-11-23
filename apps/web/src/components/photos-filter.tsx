@@ -26,7 +26,7 @@ export const PhotosFilter: FunctionComponent<PhotosFilterProps> = ({
       const filtered = treeFilterService.filterTree(searchQuery, photoTree);
       setFilteredPhotoTree(filtered);
     }
-  }, [searchQuery]);
+  }, [searchQuery, photoTree]);
 
   return (
     <div className={`w-[300px] bg-gradient-to-b from-[#080A23] to-[#141529] border border-slate-600/30 rounded-lg p-4`}>
