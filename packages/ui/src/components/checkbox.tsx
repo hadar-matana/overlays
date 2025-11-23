@@ -8,8 +8,11 @@ import { cn } from '@zohan/ui/lib/utils';
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & {
+    indeterminate?: boolean;
+    indeterminateColor?: string;
+  }
+>(({ className, indeterminate, indeterminateColor, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
@@ -18,9 +21,16 @@ const Checkbox = React.forwardRef<
     )}
     {...props}
   >
-    <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className="h-4 w-4" />
-    </CheckboxPrimitive.Indicator>
+    {!indeterminate && (
+      <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
+        <Check className="h-4 w-4" />
+      </CheckboxPrimitive.Indicator>
+    )}
+    {indeterminate && (
+      <div className="flex items-center justify-center h-full w-full">
+        <div className="w-2 h-2" style={{ backgroundColor: indeterminateColor }} />
+      </div>
+    )}
   </CheckboxPrimitive.Root>
 ));
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
