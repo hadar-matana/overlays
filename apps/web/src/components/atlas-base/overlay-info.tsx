@@ -6,11 +6,11 @@ interface DataRow {
 }
 
 interface OverlayInfoProps {
-  title?: string;
-  category?: string;
-  date?: string;
-  time?: string;
-  data?: DataRow[];
+  title: string;
+  category: string;
+  date: string;
+  time: string;
+  data: DataRow[];
   onClose?: () => void;
   className?: string;
 }
@@ -23,22 +23,7 @@ const DividerVertical = ({ className }: { className?: string }) => {
   );
 };
 
-export function OverlayInfo({
-  className,
-  title = 'נתוני צילום',
-  category = 'צילומי טיסות',
-  date = '15/02/24',
-  time = '09:39:51',
-  data = [
-    { label: 'רזולוציה', value: '1080' },
-    { label: 'ברזולוציה גבוהה', value: '4K' },
-    { label: 'רזולוציה סטנדרטית', value: '720' },
-    { label: 'איכות מלאה', value: '1080P' },
-    { label: 'רזולוציה נמוכה', value: '480' },
-    { label: 'איכות בינונית', value: '2K' },
-  ],
-  onClose,
-}: OverlayInfoProps) {
+export function OverlayInfo({ className, title, category, date, time, data, onClose }: OverlayInfoProps) {
   return (
     <div className={cn('relative flex h-full w-full flex-col items-start', className)}>
       <div

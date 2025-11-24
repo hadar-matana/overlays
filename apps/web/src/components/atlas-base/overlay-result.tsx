@@ -4,12 +4,12 @@ import type { OverlayResultItem } from '@/lib/mock-overlays';
 import { cn } from '@/lib/utils';
 import { OverlayInfo } from './overlay-info';
 
-type OverlayResultProps = Pick<OverlayResultItem, 'sensor' | 'date' | 'time'> & {
+type OverlayResultProps = Pick<OverlayResultItem, 'sensor' | 'date' | 'time' | 'info'> & {
   className?: string;
   onClick?: () => void;
 };
 
-export const OverlayResult = ({ sensor, date, time, className, onClick }: OverlayResultProps) => {
+export const OverlayResult = ({ sensor, date, time, info, className, onClick }: OverlayResultProps) => {
   const [isPluginSearchOpen, setIsPluginSearchOpen] = useState(false);
 
   const handleInfoClick = (e: React.MouseEvent) => {
@@ -66,13 +66,20 @@ export const OverlayResult = ({ sensor, date, time, className, onClick }: Overla
         </div>
       </button>
 
-      {isPluginSearchOpen && (
+      {isPluginSearchOpen && info && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
           onClick={handleClosePluginSearch}
         >
           <div className="w-[300px]" onClick={e => e.stopPropagation()}>
-            <OverlayInfo date={date} time={time} onClose={handleClosePluginSearch} />
+            <OverlayInfo
+              title={info.title}
+              category={info.category}
+              date={date}
+              time={time}
+              data={info.data}
+              onClose={handleClosePluginSearch}
+            />
           </div>
         </div>
       )}

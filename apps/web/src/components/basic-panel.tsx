@@ -1,9 +1,7 @@
 import { useMemo, useState } from 'react';
 import Panel from '@/components/atlas-base/Panel';
 import { Expander } from '@/components/atlas-base/Expander';
-import { FilterChip } from '@/components/atlas-base/FilterChip';
 import { PrimaryActionButton } from '@/components/atlas-base/primary-action-button';
-import { Select } from '@/components/atlas-base/Select';
 import { TabSelect } from '@/components/atlas-base/TabSelect';
 import { ResultFirst } from '@/components/atlas-base/result-first';
 import { ResultSecond } from '@/components/atlas-base/result-second';
@@ -13,12 +11,10 @@ import { mockOverlayResults, type OverlayResultItem } from '@/lib/mock-overlays'
 import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
 import { TimePicker } from './atlas-base/TimePicker';
 import moment from 'moment';
-type TimeOption = '1' | '2' | '3';
-type PeriodOption = 'day' | 'week' | 'vacation';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
-  const [time, setTime] = useState<{ start: moment.Moment; end: moment.Moment }>({ from: moment(), to: moment() });
+  const [time, setTime] = useState<{ start: moment.Moment; end: moment.Moment }>({ start: moment(), end: moment() });
   const resultTabs = useMemo(
     () => [
       {
@@ -107,6 +103,7 @@ export const BasicPanel = () => {
                       sensor={item.sensor}
                       date={item.date}
                       time={item.time}
+                      info={item.info}
                       onClick={() => handleOverlayClick(item)}
                     />
                   ))}
