@@ -12,10 +12,10 @@ export interface TreeNode {
   name: string;
   children?: TreeNode[];
   type?: 'folder' | 'file';
+  isDisplayed?: boolean;
 }
 
 export interface TreeViewProps {
-  sourceTree: TreeNode[];
   treeData: TreeNode[];
   checkedIds: string[];
   addElementIds: (ids: string[]) => void;
@@ -46,7 +46,7 @@ const useTreeView = () => {
 };
 
 const getAllDescendantLeavesIds = (node: TreeNode): string[] => {
-  const ids: string[] = !node.children ? [node.id] : [];
+  const ids: string[] = !node.children && node.isDisplayed ? [node.id] : [];
   if (node.children) {
     for (const child of node.children) {
       ids.push(...getAllDescendantLeavesIds(child));
@@ -181,7 +181,7 @@ const TreeNodeItem: FC<{ node: TreeNode; level: number; treeData: TreeNode[] }> 
       {hasChildren && (
         <Collapsible open={isExpanded}>
           <CollapsibleContent className="space-y-0 overflow-hidden data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up">
-            {node.children?.map(child => (
+            {node.children?.filter(child => child.isDisplayed !== false).map(child => (
               <TreeNodeItem
                 key={child.id}
                 node={child}
@@ -197,7 +197,6 @@ const TreeNodeItem: FC<{ node: TreeNode; level: number; treeData: TreeNode[] }> 
 };
 
 export const TreeView: FC<TreeViewProps> = ({
-  sourceTree,
   treeData,
   checkedIds,
   addElementIds,
@@ -222,9 +221,9 @@ export const TreeView: FC<TreeViewProps> = ({
       });
     };
     
-    calculateParentStates(sourceTree);
+    calculateParentStates(treeData);
     return map;
-  }, [checkedIds, sourceTree]);
+  }, [checkedIds, treeData]);
 
   const toggleExpanded = useCallback((id: string) => {
     setExpandedItems(prev => {
@@ -267,7 +266,7 @@ export const TreeView: FC<TreeViewProps> = ({
   return (
     <TreeViewContext.Provider value={treeContextValue}>
       <div className='text-sm bg-gradient-to-b from-[#080A23] to-[#141529] text-[#FFFFFFE0] flex flex-col items-stretch w-full'>
-        {treeData.map(node => (
+        {treeData.filter(node => node.isDisplayed !== false).map(node => (
           <TreeNodeItem key={node.id} node={node} level={0} treeData={treeData} />
         ))}
       </div>

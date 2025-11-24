@@ -3,30 +3,26 @@ import TreeView, { type TreeNode } from './tree-view';
 import SearchInput from './search-input';
 import { treeFilterService } from './tree-filter-service';
 
-interface PhotosFilterProps {
-  photoTree: TreeNode[];
+interface TreeWithFilterProps {
+  tree: TreeNode[];
   checkedIds: string[];
   addElementIds: (ids: string[]) => void;
   removeElementIds: (ids: string[]) => void;
 }
 
-export const PhotosFilter: FunctionComponent<PhotosFilterProps> = ({
-  photoTree, 
+export const TreeWithFilter: FunctionComponent<TreeWithFilterProps> = ({
+  tree, 
   checkedIds,
   addElementIds,
   removeElementIds
 }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredPhotoTree, setFilteredPhotoTree] = useState<TreeNode[]>(photoTree);
+  const [filteredTree, setFilteredTree] = useState<TreeNode[]>(tree);
 
   useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredPhotoTree(photoTree);
-    } else {
-      const filtered = treeFilterService.filterTree(searchQuery, photoTree);
-      setFilteredPhotoTree(filtered);
-    }
-  }, [searchQuery, photoTree]);
+    const filteredTree = treeFilterService.filterTree(searchQuery, tree);
+    setFilteredTree(filteredTree);
+  }, [searchQuery, tree]);
 
   return (
     <div className={`w-[300px] bg-gradient-to-b from-[#080A23] to-[#141529] border border-slate-600/30 rounded-lg p-4`}>
@@ -40,8 +36,7 @@ export const PhotosFilter: FunctionComponent<PhotosFilterProps> = ({
       
       <div className="max-h-[252px] overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-500/50 [&::-webkit-scrollbar-thumb]:rounded-full">
         <TreeView
-          sourceTree={photoTree} 
-          treeData={filteredPhotoTree} 
+          treeData={filteredTree} 
           checkedIds={checkedIds}
           addElementIds={addElementIds}
           removeElementIds={removeElementIds}
@@ -51,4 +46,4 @@ export const PhotosFilter: FunctionComponent<PhotosFilterProps> = ({
   );
 };
 
-export default PhotosFilter;
+export default TreeWithFilter;
