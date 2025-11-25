@@ -16,5 +16,8 @@
     "hooks": "@zohan/ui/hooks",
     "lib": "@zohan/ui/lib",
     "ui": "@zohan/ui/components"
+  },
+  "registries": {
+    "@ss-components": "https://shadcnstudio.com/r/components/{name}.json"
   }
 }

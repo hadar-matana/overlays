@@ -1,0 +1,8 @@
+export const ResultSecond = () => {
+  return (
+    <div className="w-full text-right text-[16px] leading-[7px] text-white">
+      זהו התוכן של הטאב השני.
+    </div>
+  );
+};
+

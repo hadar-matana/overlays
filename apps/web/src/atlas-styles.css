@@ -1,0 +1,29 @@
+:root {
+    /* panel (frame) */
+    --panel-w: 300px;
+    --panel-pad-x: 16px;
+    --panel-pad-y: 24px;
+    --panel-gap: 8px;
+    --panel-bg-1: #080a23;
+    --panel-bg-2: #141529;
+  
+    /* 300×44 top control */
+    --ctl-bg: #303142;
+    --ctl-radius: 8px;
+    --ctl-h: 44px;
+    --ctl-pad-x: 8px;
+    --ctl-fg: rgba(255,255,255,.85);
+    --ctl-muted: rgba(255,255,255,.65);
+  
+    /* pill/chip (134×24) */
+    --chip-w: 134px;
+    --chip-h: 32px;
+    --chip-bg: #2a2d3f;
+    --chip-radius: 12px;
+    --chip-border: #1fc5a8; /* primary-6 from Figma */
+  
+    /* borders & hover */
+    --line: rgba(255,255,255,.14);
+    --hover: rgba(255,255,255,.08);
+  }
+  
