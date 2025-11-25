@@ -8,6 +8,7 @@
     "build": "turbo run build"
   },
   "dependencies": {
+    "@fontsource/heebo": "^5.2.8",
     "turbo": "^2.5.4"
   }
 }

@@ -1,4 +1,6 @@
 @import './fonts.css';
+@import "@fontsource/heebo/400.css";
+@import "@fontsource/heebo/700.css";
 
 :root {
   --header-height: 64px;
@@ -7,4 +9,9 @@
 html {
   font-family: 'Ploni', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
+}
+
+[data-highlighted] {
+  background: transparent !important;
+  color: inherit !important;
 }
