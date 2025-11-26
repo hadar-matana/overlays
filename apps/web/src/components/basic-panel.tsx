@@ -11,6 +11,7 @@ import { mockOverlayResults, type OverlayResultItem } from '@/lib/mock-overlays'
 import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
 import { TimePicker } from './atlas-base/TimePicker';
 import moment from 'moment';
+import { PhotoTreeExpander } from './atlas-base/photo-tree-expander';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -61,6 +62,12 @@ export const BasicPanel = () => {
                     value={activeResult}
                     onValueChange={value => setActiveResult(value)}
                     options={resultTabs}
+                  />
+
+                  <PhotoTreeExpander 
+                    addElementIds={() => undefined}
+                    checkedIds={[]}
+                    removeElementIds={() => undefined}
                   />
 
                   <Expander
