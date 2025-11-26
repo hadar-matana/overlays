@@ -52,7 +52,7 @@ export function TabSelect<T extends string>({
         <TabsContent
           key={option.value}
           value={option.value}
-          className="mt-3 w-full border border-[color:var(--line)] bg-[#26292F] p-4 text-right text-[14px] leading-[22px] text-white"
+          className="mt-3 w-full text-right text-[14px] leading-[22px] text-white"
         >
           {option.content}
         </TabsContent>
