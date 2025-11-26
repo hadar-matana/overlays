@@ -13,6 +13,7 @@ import { TimePicker } from './atlas-base/TimePicker';
 import moment from 'moment';
 import { PhotoTreeExpander } from './atlas-base/photo-tree-expander';
 import { GeoPickerExpander } from './atlas-base/geo-picker-expander';
+import { AdvancedExpander } from './atlas-base/advanced-expander';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -72,6 +73,8 @@ export const BasicPanel = () => {
                   />
 
                   <GeoPickerExpander isGeoPickingActive={true} toggleGeoPicking={() => undefined} />
+
+                  <AdvancedExpander fromValue='' onFromChange={() => {}} onToChange={() => {}} toValue='' />
 
                   <Expander
                     className="gap-0"

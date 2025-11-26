@@ -83,7 +83,7 @@ export function Expander({
                   contentClassName,
                 )}
               >
-                <div className="border-t border-white/10 pt-3 [&>*]:mx-auto text-center">{content}</div>
+                <div className="border-t border-white/10 pt-3">{content}</div>
               </AccordionContent>
             )}
           </AccordionItem>
