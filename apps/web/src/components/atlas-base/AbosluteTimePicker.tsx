@@ -9,8 +9,8 @@ interface AbsoluteTimePickerProps {
 
 export const AbsoluteTimePicker = ({ time, setTime }: AbsoluteTimePickerProps) => {
   return (
-    <div>
-      <I18nProvider locale="he">
+    <I18nProvider locale="he">
+      <div className="flex w-full justify-center">
         <RangeCalendar
           className="dark"
           value={{
@@ -24,7 +24,7 @@ export const AbsoluteTimePicker = ({ time, setTime }: AbsoluteTimePickerProps) =
             })
           }
         />
-      </I18nProvider>
-    </div>
+      </div>
+    </I18nProvider>
   );
 };

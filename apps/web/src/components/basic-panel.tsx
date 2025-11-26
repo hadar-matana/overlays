@@ -9,7 +9,7 @@ import { ResultThird } from '@/components/atlas-base/result-third';
 import { OverlayResult } from '@/components/atlas-base/overlay-result';
 import { mockOverlayResults, type OverlayResultItem } from '@/lib/mock-overlays';
 import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
-import { TimePicker } from './atlas-base/TimePicker';
+import { TimeFilter } from './atlas-base/TimeFilter';
 import moment from 'moment';
 type ResultTab = 'first' | 'second' | 'third';
 
@@ -63,21 +63,7 @@ export const BasicPanel = () => {
                     options={resultTabs}
                   />
 
-                  <Expander
-                    className="gap-0"
-                    itemClassName="rounded-none"
-                    triggerClassName="rounded-none px-0 py-2 text-white/60"
-                    contentClassName="px-0 pt-2"
-                    items={[
-                      {
-                        id: 'times',
-                        header: 'זמנים',
-                        content: (
-                          <TimePicker className="w-full" time={time} setTime={setTime} defaultTimeMode="relative" />
-                        ),
-                      },
-                    ]}
-                  />
+                  <TimeFilter className="w-full" time={time} setTime={setTime} defaultTimeMode="relative" />
                 </div>
               ),
             },
