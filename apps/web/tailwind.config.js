@@ -7,6 +7,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
     "../../packages/ui/node_modules/@heroui/theme/dist/components/*.js"
+    "./node_modules/@heroui/theme/dist/components/(calendar|button).js"
   ],
   theme: {
     extend: {
@@ -22,8 +23,15 @@ export default {
         sans: ['var(--font-sans)'],
         heebo: ['Heebo', 'sans-serif'],
       },
-      // ✅ include BOTH your token colors and shadcn’s HSL palette
       keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
         'collapsible-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-collapsible-content-height)' },
@@ -34,6 +42,8 @@ export default {
         },
       },
       animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-out',
         'collapsible-up': 'collapsible-up 0.2s ease-out',
       },

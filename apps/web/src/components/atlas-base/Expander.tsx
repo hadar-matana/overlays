@@ -18,10 +18,10 @@ const ExpanderDepthContext = React.createContext(0);
 
 export function Expander({
   items,
-  className,
-  itemClassName,
-  triggerClassName,
-  contentClassName,
+  className="gap-0",
+  itemClassName="rounded-none",
+  triggerClassName="rounded-none px-0 py-2 text-white/60 border-b border-white/10",
+  contentClassName="px-0 pb-3"
 }: {
   items: ExpanderItem[];
   className?: string;
@@ -83,7 +83,7 @@ export function Expander({
                   contentClassName,
                 )}
               >
-                <div className="border-t border-white/10 pt-3">{content}</div>
+                <div className="border-t border-white/10 pt-3 [&>*]:mx-auto text-center">{content}</div>
               </AccordionContent>
             )}
           </AccordionItem>
