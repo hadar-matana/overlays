@@ -12,6 +12,7 @@ import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
 import { TimePicker } from './atlas-base/TimePicker';
 import moment from 'moment';
 import { PhotoTreeExpander } from './atlas-base/photo-tree-expander';
+import { GeoPickerExpander } from './atlas-base/geo-picker-expander';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -69,6 +70,8 @@ export const BasicPanel = () => {
                     checkedIds={[]}
                     removeElementIds={() => undefined}
                   />
+
+                  <GeoPickerExpander isGeoPickingActive={true} toggleGeoPicking={() => undefined} />
 
                   <Expander
                     className="gap-0"
