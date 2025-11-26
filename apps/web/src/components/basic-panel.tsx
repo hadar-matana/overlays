@@ -11,6 +11,7 @@ import { mockOverlayResults, type OverlayResultItem } from '@/lib/mock-overlays'
 import { fetchOverlayResultDetails } from '@/lib/overlay-rpc';
 import { TimePicker } from './atlas-base/TimePicker';
 import moment from 'moment';
+import { GeoPickerExpander } from './atlas-base/geo-picker-expander';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -78,6 +79,7 @@ export const BasicPanel = () => {
                       },
                     ]}
                   />
+                  <GeoPickerExpander isGeoPickingActive={true} toggleGeoPicking={() => undefined} />
                 </div>
               ),
             },
