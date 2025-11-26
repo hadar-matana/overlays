@@ -25,7 +25,7 @@ export const TreeWithFilter: FunctionComponent<TreeWithFilterProps> = ({
   }, [searchQuery, tree]);
 
   return (
-    <div className={`w-[300px] bg-gradient-to-b from-[#080A23] to-[#141529] border border-slate-600/30 rounded-lg p-4`}>
+    <div className={`w-[293px] p-4`}>
       <div className="mb-4">
         <SearchInput
           searchValue={searchQuery}
