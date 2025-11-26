@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
-import { Button } from '@zohan/ui/components/button';
 import { cn } from '../../lib/utils';
 
-export interface IncrementInputProps extends Omit<React.ComponentProps<'input'>, 'type' | 'value' | 'onChange'> {
+export interface IncrementInputProps
+  extends Omit<React.ComponentProps<'input'>, 'type' | 'value' | 'onChange'> {
   value: number;
   onChange: (value: number) => void;
   min?: number;
@@ -12,56 +12,67 @@ export interface IncrementInputProps extends Omit<React.ComponentProps<'input'>,
   className?: string;
 }
 
-export const IncrementInput = ({ value, onChange, step = 1, min = 0, className, ...props }: IncrementInputProps) => {
-  const BG = '#26292F';
-  const RADIUS = 'rounded-[4px]';
-  const BORDER_IDLE = '#26292F';
-
-  const handleDecrement = () => {
-    const newValue = value - step;
-    if (newValue >= min) {
-      onChange(newValue);
-    }
-  };
-
+export const IncrementInput = ({
+  value,
+  onChange,
+  step = 1,
+  min = 0,
+  max,
+  className,
+  ...props
+}: IncrementInputProps) => {
   const canDecrement = value > min;
 
+  const handleIncrement = () => {
+    let next = value + step;
+    if (max !== undefined) next = Math.min(max, next);
+    onChange(next);
+  };
+
+  const handleDecrement = () => {
+    let next = value - step;
+    if (next < min) return;
+    onChange(next);
+  };
+
   return (
-    <>
-      <div
-        className={cn(
-          'flex flex-row items-center justify-between overflow-hidden',
-          RADIUS,
-          'text-sm font-medium text-white',
-          `bg-[${BG}]`,
-          `border border-[${BORDER_IDLE}]`,
-          'transition-colors',
-          'hover:border-white/30',
-          'outline-none ring-0 focus-within:outline-none focus-within:ring-0 focus-within:border-[#1FC5A8]',
-          className,
-        )}
-      >
-        <div className="display-flex flex-col items-center justify-center min-w-0">
-          <p className="w-7 text-center tabular-nums text-sm text-white outline-none ring-0" {...props}>
-            {value}
-          </p>
-        </div>
-        <div className="flex h-6 flex-col border-[#26292F]">
-          <Button
-            className="h-1/2 w-6 rounded-none border-white/10 bg-transparent hover:bg-[#1FC5A8]/10 hover:border-transparent transition-colors outline-none ring-0 focus-visible:outline-none focus-visible:ring-0 p-0"
-            onClick={() => onChange(value + step)}
-          >
-            <ChevronUpIcon />
-          </Button>
-          <Button
-            className="h-1/2 w-6 rounded-none border-white/10 bg-transparent hover:bg-[#1FC5A8]/10 hover:border-transparent transition-colors outline-none ring-0 focus-visible:outline-none focus-visible:ring-0 p-0"
-            onClick={handleDecrement}
-            disabled={!canDecrement}
-          >
-            <ChevronDownIcon />
-          </Button>
-        </div>
+    <div
+      dir="ltr" 
+      tabIndex={0}
+      className={cn(
+        'inline-flex h-[30px] items-stretch overflow-hidden',
+        'rounded-[7px] border border-[#434343] bg-[#26292F]',
+        'text-[14px] leading-[22px] text-white',
+        'focus-within:border-[#1FC5A8] focus:border-[#1FC5A8] focus:outline-none',
+        className,
+      )}
+    >
+      <div className="flex w-4 flex-col border-r border-[#434343]">
+        <button
+          type="button"
+          onClick={handleIncrement}
+          className="flex flex-1 items-center justify-center border-b border-[#434343] bg-transparent"
+        >
+          <ChevronUpIcon className="h-3 w-3" strokeWidth={2} />
+        </button>
+        <button
+          type="button"
+          onClick={handleDecrement}
+          disabled={!canDecrement}
+          className={cn(
+            'flex flex-1 items-center justify-center bg-transparent',
+            !canDecrement && 'opacity-40 cursor-default',
+          )}
+        >
+          <ChevronDownIcon className="h-3 w-3" strokeWidth={2} />
+        </button>
       </div>
-    </>
+
+      {/* number */}
+      <div className="flex flex-1 items-center justify-center px-2">
+        <input {...props} type="hidden" value={value} readOnly />
+        <span className="tabular-nums">{value}</span>
+      </div>
+    </div>
   );
 };

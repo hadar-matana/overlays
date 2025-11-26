@@ -31,9 +31,9 @@ export const RelativeTimePicker = ({
       <div className="w-1/3">
         <p>זמן אוחר</p>
       </div>
-      <IncrementInput className="w-1/3" value={timeAmount} onChange={setTimeAmount} />
+      <IncrementInput className="w-1/3 h-8" value={timeAmount} onChange={setTimeAmount} />
       <Select
-        className="w-1/3 flex justify-between p-1"
+        className="w-1/3  h-8 flex justify-between p-1"
         value={timeUnit}
         onChange={value => setTimeUnit(value as moment.unitOfTime.Base)}
         options={timeUnits}
