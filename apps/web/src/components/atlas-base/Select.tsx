@@ -29,7 +29,7 @@ export function Select({
 }: AtlasSelectProps) {
   // Figma tokens
   const BG = '#26292F'; 
-  const RADIUS = 'rounded-[4px]';
+  const RADIUS = 'rounded-[7px]';
   const BORDER_IDLE = '#26292F';
 
   const widthClass = fullWidth ? 'w-full' : 'min-w-[110px]';
@@ -48,7 +48,8 @@ export function Select({
     `border border-[${BORDER_IDLE}]`,
     // states
     'transition-colors',
-    'hover:border-white/30', 
+    'hover:border-white/30',
+    'border border-[color:var(--line)] bg-[#26292F]', 
     'data-[state=open]:border-[#1FC5A8]', 
     'outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0',
     className,
@@ -65,7 +66,7 @@ export function Select({
         side="bottom"
         align="end"
         sideOffset={4}
-        className="rounded-[4px] border border-[#26292F] bg-[#26292F] shadow-lg outline-none ring-0"
+        className="rounded-[7px] border border-[#26292F] bg-[#26292F] shadow-lg outline-none ring-0"
         style={{
           width: 'var(--radix-select-trigger-width)',
           minWidth: 'var(--radix-select-trigger-width)',
@@ -79,7 +80,7 @@ export function Select({
               value={option.value}
               className={cn(
                 // force size to match design (shadcn defaults to h-10)
-                '!h-6 flex items-center justify-center !px-3 !py-0 rounded-[4px]',
+                '!h-6 flex items-center justify-center !px-3 !py-0 rounded-[7px]',
                 'text-sm text-white/85 transition-colors border border-transparent !leading-[22px]',
                 // kill rings/glow
                 'outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0',

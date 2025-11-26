@@ -6,7 +6,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "../../packages/ui/src/**/*.{js,ts,jsx,tsx}",
-    "../../packages/ui/node_modules/@heroui/theme/dist/components/*.js"
+    "../../packages/ui/node_modules/@heroui/theme/dist/components/*.js",
     "./node_modules/@heroui/theme/dist/components/(calendar|button).js"
   ],
   theme: {

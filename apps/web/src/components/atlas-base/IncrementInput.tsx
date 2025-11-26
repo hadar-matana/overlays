@@ -38,10 +38,12 @@ export const IncrementInput = ({
   return (
     <div
       dir="ltr" 
+      tabIndex={0}
       className={cn(
         'inline-flex h-[30px] items-stretch overflow-hidden',
-        'rounded-[7px] border border-[#1FC5A8] bg-[#26292F]',
+        'rounded-[7px] border border-[#434343] bg-[#26292F]',
         'text-[14px] leading-[22px] text-white',
+        'focus-within:border-[#1FC5A8] focus:border-[#1FC5A8] focus:outline-none',
         className,
       )}
     >
