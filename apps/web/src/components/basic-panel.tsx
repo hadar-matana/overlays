@@ -14,6 +14,8 @@ import { PhotoTreeExpander } from './atlas-base/photo-tree-expander';
 import { GeoPickerExpander } from './atlas-base/geo-picker-expander';
 import { AdvancedExpander } from './atlas-base/advanced-expander';
 import { TimeFilter } from './atlas-base/TimeFilter';
+import SearchByImageId from './search-by-image-id';
+import { SearchByImageIdExpander } from './atlas-base/search-by-image-expander';
 type ResultTab = 'first' | 'second' | 'third';
 
 export const BasicPanel = () => {
@@ -77,6 +79,8 @@ export const BasicPanel = () => {
                   <AdvancedExpander fromValue='' onFromChange={() => {}} onToChange={() => {}} toValue='' />
               
                   <TimeFilter className="w-full" time={time} setTime={setTime} defaultTimeMode="relative" />
+
+                  <SearchByImageIdExpander onSearch={value => console.log(value)} />
                 </div>
               ),
             },
