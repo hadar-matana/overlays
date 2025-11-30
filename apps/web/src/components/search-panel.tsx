@@ -1,10 +1,10 @@
 import { useAppForm } from "@/lib/form-envelops";
 import type { FunctionComponent } from "react";
-import { GeoPickerExpander } from "./atlas-base/geo-picker-expander";
-import { PhotoTreeExpander } from "./atlas-base/photo-tree-expander";
+import { GeoPicker } from "./geo-picker";
+import { PhotoTree } from "./atlas-base/photo-tree";
 import { AdvancedExpander } from "./atlas-base/advanced-expander";
 import { useMapPanelContext } from "@/contexts/map-panel-context";
-import SearchByImageId from "./search-by-image-id";
+import SearchByImageId, { type ImageIdSearchMode } from "./search-by-image-id";
 import { PrimaryActionButton } from "./atlas-base/primary-action-button";
 
 export const SearchPanel: FunctionComponent<any> = ({}) => {
@@ -30,7 +30,7 @@ export const SearchPanel: FunctionComponent<any> = ({}) => {
                 }
             },
             searchByImageId: {
-                searchMode: 'and' as 'and' | 'just',
+                searchMode: 'and' as ImageIdSearchMode,
                 imageId: ''
             }
         },
@@ -51,7 +51,7 @@ export const SearchPanel: FunctionComponent<any> = ({}) => {
                         const {isGeoPickingActive, setIsGeoPickingActive} = useMapPanelContext();
 
                         return (
-                            <GeoPickerExpander
+                            <GeoPicker
                                 wktPolygon={field.state.value.wktPolygon}
                                 isGeoPickingActive={isGeoPickingActive}
                                 toggleGeoPicking={setIsGeoPickingActive} 
@@ -70,7 +70,7 @@ export const SearchPanel: FunctionComponent<any> = ({}) => {
                             field.handleChange(newTypesArray);
                         };
                         return (
-                            <PhotoTreeExpander 
+                            <PhotoTree 
                                 addElementIds={onAddElements}
                                 removeElementIds={onRemoveElements}
                                 checkedIds={field.state.value}
@@ -102,7 +102,7 @@ export const SearchPanel: FunctionComponent<any> = ({}) => {
                             field.handleChange({...field.state.value, imageId: imageId});
                         }
 
-                        const onChangeSearchByIdMode = (mode: 'and' | 'just') => {
+                        const onChangeSearchByIdMode = (mode: ImageIdSearchMode) => {
                             field.handleChange({...field.state.value, searchMode: mode});
                         }
                         return (<SearchByImageId

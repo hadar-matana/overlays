@@ -2,11 +2,13 @@ import { type FC } from 'react';
 import { TabSelect } from './atlas-base/TabSelect';
 import { Expander } from './atlas-base/Expander';
 
+export type ImageIdSearchMode = 'and' | 'just';
+
 export interface SearchByImageIdProps {
   imageId: string;
   onSearchByIdValue: (imageId: string) => void
-  searchByIdMode: 'and' | 'just';
-  onChangeSearchByIdMode: (mode: 'and' | 'just') => void
+  searchByIdMode: ImageIdSearchMode;
+  onChangeSearchByIdMode: (mode: ImageIdSearchMode) => void
 }
 
 export const SearchByImageId: FC<SearchByImageIdProps> = ({ 
@@ -29,7 +31,7 @@ export const SearchByImageId: FC<SearchByImageIdProps> = ({
           <div className='px-1'>
             <TabSelect
               value={searchByIdMode}
-              onValueChange={value => onChangeSearchByIdMode(value as 'and' | 'just')}
+              onValueChange={value => onChangeSearchByIdMode(value as ImageIdSearchMode)}
               options={[
                 { label: 'וגם', value: 'and', content: undefined },
                 { label: 'רק', value: 'just', content: undefined },

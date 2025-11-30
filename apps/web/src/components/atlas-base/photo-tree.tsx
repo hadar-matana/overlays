@@ -3,7 +3,7 @@ import { Expander } from './Expander';
 import TreeWithFilter from '../tree-with-filter';
 import { type TreeNode } from '../tree-view';
 
-interface PhotoTreeExpanderProps {
+interface PhotoTreeProps {
   checkedIds: string[];
   addElementIds: (ids: string[]) => void;
   removeElementIds: (ids: string[]) => void;
@@ -57,7 +57,7 @@ const photoTypeTree: TreeNode[] = [
   }
 ];
 
-export const PhotoTreeExpander: FunctionComponent<PhotoTreeExpanderProps> = ({
+export const PhotoTree: FunctionComponent<PhotoTreeProps> = ({
   checkedIds,
   addElementIds,
   removeElementIds
