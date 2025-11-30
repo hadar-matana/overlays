@@ -19,7 +19,7 @@ export function TabSelect<T extends string>({
     <Tabs dir="rtl" value={value} onValueChange={v => onValueChange(v as T)} className="w-full">
       <TabsList
         className={cn(
-          'flex h-6 w-full overflow-hidden rounded-[4px] border border-[color:var(--line)] bg-[#26292F] p-0',
+          'flex h-6 w-full overflow-hidden rounded-[6px] border border-[color:var(--line)] bg-[#26292F] p-0',
           className,
         )}
         // apply Heebo once at the list level
@@ -35,7 +35,7 @@ export function TabSelect<T extends string>({
               // typography (14/22, regular)
               'text-[14px] leading-[22px] font-normal tracking-[0]',
               // rounding per side in RTL
-              'rounded-none first:rounded-tr-[4px] first:rounded-br-[4px] last:rounded-tl-[4px] last:rounded-bl-[4px]',
+              'rounded-none first:rounded-tr-[6px] first:rounded-br-[6px] last:rounded-tl-[6px] last:rounded-bl-[6px]',
               // colors + active state
               'text-[color:var(--ctl-muted)] data-[state=active]:text-[#1FC5A8]',
               // border driven by Radix active state (no inline styles needed)

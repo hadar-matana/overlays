@@ -1,11 +1,13 @@
 export interface GeoPickerProps {
   toggleGeoPicking: () => void;
   isGeoPickingActive: boolean;
+  wktPolygon: string;
 }
 
 export function GeoPicker({
   toggleGeoPicking,
   isGeoPickingActive,
+  wktPolygon,
 }: GeoPickerProps) {
   return (
     <button

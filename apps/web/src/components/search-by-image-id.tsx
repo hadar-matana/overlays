@@ -1,47 +1,53 @@
-import { type FC, useState } from 'react';
-import { Search } from 'lucide-react';
+import { type FC } from 'react';
+import { TabSelect } from './atlas-base/TabSelect';
+import { Expander } from './atlas-base/Expander';
 
 export interface SearchByImageIdProps {
-  onSearch?: (imageId: string) => void;
+  imageId: string;
+  onSearchByIdValue: (imageId: string) => void
+  searchByIdMode: 'and' | 'just';
+  onChangeSearchByIdMode: (mode: 'and' | 'just') => void
 }
 
-export const SearchByImageId: FC<SearchByImageIdProps> = ({ onSearch }) => {
-  const [value, setValue] = useState('');
-  
+export const SearchByImageId: FC<SearchByImageIdProps> = ({ 
+  imageId, 
+  onSearchByIdValue, 
+  searchByIdMode, 
+  onChangeSearchByIdMode 
+}) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  const handleSearchTriggered = () => {
-    if (onSearch) onSearch(value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearchTriggered();
-      e.currentTarget.blur();
-    }
+    onSearchByIdValue(e.target.value);
   };
 
   return (
-    <div className="w-[293px]">
-      <div className="flex items-center gap-2 px-1" dir="rtl">
-        <input
-          type="text"
-          value={value}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          placeholder="הזן מזהה תמונה"
-          className="flex-1 h-6 px-3 text-sm text-white/90 placeholder:text-slate-400 bg-slate-800/50 border border-slate-600/50 rounded-lg focus:outline-none focus:border-[#1FC5A8] focus:ring-0 transition-all duration-200"
-        />
-        <button
-          onClick={handleSearchTriggered}
-          className="h-6 w-6 flex items-center justify-center bg-slate-800/50 border border-slate-600/50 rounded-lg hover:bg-slate-700/50 hover:border-[#1FC5A8] active:bg-slate-600/50 focus:outline-none transition-all duration-200"
-        >
-          <Search className="h-4 w-4 text-slate-400" strokeWidth={2} />
-        </button>
-      </div>
-    </div>
+    <Expander
+      items={[{
+        id: 'search-by-image-id',
+        header: 'חיפוש לפי מזהה תמונה',
+        content: (
+        <div className="w-[293px]">
+          <div className='px-1'>
+            <TabSelect
+              value={searchByIdMode}
+              onValueChange={value => onChangeSearchByIdMode(value as 'and' | 'just')}
+              options={[
+                { label: 'וגם', value: 'and', content: undefined },
+                { label: 'רק', value: 'just', content: undefined },
+              ]}
+            />
+          </div>
+          <div className="flex items-center gap-2 px-1" dir="rtl">
+            <input
+              type="text"
+              value={imageId}
+              onChange={handleChange}
+              placeholder="הזן מזהה תמונה"
+              className="flex-1 h-6 px-3 text-sm text-white/90 placeholder:text-slate-400 bg-slate-800/50 border border-slate-600/50 rounded-lg focus:outline-none focus:border-[#1FC5A8] focus:ring-0 transition-all duration-200"
+            />
+          </div>
+        </div>
+      )}]}
+    />
   );
 };
 

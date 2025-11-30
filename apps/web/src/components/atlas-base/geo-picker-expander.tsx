@@ -5,13 +5,15 @@ import {type GeoPickerProps, GeoPicker } from '../geo-picker';
 export const GeoPickerExpander: FunctionComponent<GeoPickerProps> = ({
   toggleGeoPicking,
   isGeoPickingActive,
+  wktPolygon
 }: GeoPickerProps) => {
   return (
     <Expander
       items={[{
         id: 'areas',
         header: 'אזורים',
-        content: (<GeoPicker 
+        content: (<GeoPicker
+            wktPolygon={wktPolygon} 
             isGeoPickingActive={isGeoPickingActive}
             toggleGeoPicking={toggleGeoPicking}
         />)
