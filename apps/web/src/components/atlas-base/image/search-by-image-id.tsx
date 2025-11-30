@@ -46,3 +46,4 @@ export const SearchByImageId: FC<SearchByImageIdProps> = ({ onSearch }) => {
 };
 
 export default SearchByImageId;
+

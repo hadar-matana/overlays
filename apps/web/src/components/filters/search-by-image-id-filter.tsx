@@ -1,8 +1,8 @@
 import { type FunctionComponent } from 'react';
-import { Expander } from './Expander';
-import {type SearchByImageIdProps, SearchByImageId } from '../search-by-image-id';
+import { Expander } from '../atlas-base/basic/expander';
+import { type SearchByImageIdProps, SearchByImageId } from '../atlas-base/image/search-by-image-id';
 
-export const SearchByImageIdExpander: FunctionComponent<SearchByImageIdProps> = ({
+export const SearchByImageIdFilter: FunctionComponent<SearchByImageIdProps> = ({
   onSearch,
 }: SearchByImageIdProps) => {
   return (
@@ -16,3 +16,4 @@ export const SearchByImageIdExpander: FunctionComponent<SearchByImageIdProps> = 
       }]}
     />);
 };
+

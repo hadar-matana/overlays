@@ -1,5 +1,5 @@
 import { type FunctionComponent } from 'react';
-import { IncrementInput } from './atlas-base/IncrementInput';
+import { IncrementInput } from '../atlas-base/basic/increment-input';
 
 export interface ResolutionFilterProps {
   fromValue: string;
@@ -22,13 +22,14 @@ export const ResolutionFilter: FunctionComponent<ResolutionFilterProps> = ({
       
       <div className="flex items-center gap-2 px-1" dir="rtl">
         <span className="text-[#FFFFFFE0] shrink-0">מ</span>
-        <IncrementInput className="w-1/3" value={Number(fromValue)} onChange={onFromChange} />
+        <IncrementInput value={Number(fromValue)} onChange={onFromChange} />
         
         <span className="text-[#FFFFFFE0] shrink-0">עד</span>
-        <IncrementInput className="w-1/3" value={Number(toValue)} onChange={onToChange} />
+        <IncrementInput value={Number(toValue)} onChange={onToChange} />
       </div>
     </div>
   );
 };
 
 export default ResolutionFilter;
+

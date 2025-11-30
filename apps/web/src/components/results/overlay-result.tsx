@@ -86,3 +86,4 @@ export const OverlayResult = ({ sensor, date, time, info, className, onClick }: 
     </>
   );
 };
+

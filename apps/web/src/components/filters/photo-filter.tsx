@@ -1,14 +1,14 @@
 import { type FunctionComponent } from 'react';
-import { Expander } from './Expander';
-import TreeWithFilter from '../tree-with-filter';
+import { Expander } from '../atlas-base/basic/expander';
+import TreeWithFilter from '../atlas-base/tree/tree-with-filter';
 
-interface PhotoTreeExpanderProps {
+interface PhotoFilterProps {
   checkedIds: string[];
   addElementIds: (ids: string[]) => void;
   removeElementIds: (ids: string[]) => void;
 }
 
-export const PhotoTreeExpander: FunctionComponent<PhotoTreeExpanderProps> = ({
+export const PhotoFilter: FunctionComponent<PhotoFilterProps> = ({
   checkedIds,
   addElementIds,
   removeElementIds
@@ -27,3 +27,4 @@ export const PhotoTreeExpander: FunctionComponent<PhotoTreeExpanderProps> = ({
       }]}
     />);
 };
+

@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import { Button } from '@zohan/ui/components/button';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../lib/utils';
 
 type PrimaryActionButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;

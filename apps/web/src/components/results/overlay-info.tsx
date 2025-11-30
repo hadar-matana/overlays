@@ -109,3 +109,4 @@ export function OverlayInfo({ className, title, category, date, time, data, onCl
     </div>
   );
 }
+

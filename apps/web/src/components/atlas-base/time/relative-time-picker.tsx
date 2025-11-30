@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useState, useEffect } from 'react';
-import { Select } from './Select';
-import { IncrementInput } from './IncrementInput';
+import { Select } from '../basic/select';
+import { IncrementInput } from '../basic/increment-input';
 import { cn } from '@/lib/utils';
 interface RelativeTimePickerProps {
   setTime: (time: { start: moment.Moment; end: moment.Moment }) => void;
@@ -31,9 +31,9 @@ export const RelativeTimePicker = ({
       <div className="w-1/3">
         <p>זמן אוחר</p>
       </div>
-      <IncrementInput className="w-1/3 h-8" value={timeAmount} onChange={setTimeAmount} />
+      <IncrementInput className="h-8" value={timeAmount} onChange={setTimeAmount} />
       <Select
-        className="w-1/3  h-8 flex justify-between p-1"
+        className="w-1/3"
         value={timeUnit}
         onChange={value => setTimeUnit(value as moment.unitOfTime.Base)}
         options={timeUnits}
@@ -41,3 +41,4 @@ export const RelativeTimePicker = ({
     </div>
   );
 };
+

@@ -1,8 +1,8 @@
 import { type FunctionComponent } from 'react';
-import { Expander } from './Expander';
-import ResolutionFilter, { type ResolutionFilterProps } from '../resolution-filter';
+import { Expander } from '../atlas-base/basic/expander';
+import ResolutionFilter, { type ResolutionFilterProps } from './resolution-filter';
 
-export const AdvancedExpander: FunctionComponent<ResolutionFilterProps> = ({
+export const AdvancedFilter: FunctionComponent<ResolutionFilterProps> = ({
     fromValue,
     toValue,
     onFromChange,
@@ -22,3 +22,4 @@ export const AdvancedExpander: FunctionComponent<ResolutionFilterProps> = ({
       }]}
     />);
 };
+
