@@ -5,9 +5,11 @@ import { CalendarSection } from './calendar-section';
 import { DateTimeRow } from './date-time-row';
 import { parseTimeString } from './time-parser';
 
+export type AbsoluteTime = { start: any; end: any };
+
 interface AbsoluteTimePickerProps {
-  time: { start: moment.Moment; end: moment.Moment };
-  setTime: (time: { start: moment.Moment; end: moment.Moment }) => void;
+  time: AbsoluteTime;
+  setTime: (time: AbsoluteTime) => void;
 }
 
 export const AbsoluteTimePicker = ({ time, setTime }: AbsoluteTimePickerProps) => {

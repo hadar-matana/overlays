@@ -10,6 +10,7 @@ export const AdvancedFilter: FunctionComponent<ResolutionFilterProps> = ({
 }: ResolutionFilterProps) => {
   return (
     <Expander
+      contentClassName="px-3.5 pt-3.5"
       items={[{
         id: 'advanced',
         header: 'מתקדם',

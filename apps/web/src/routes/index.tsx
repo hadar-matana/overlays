@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { X } from 'lucide-react';
 import { BasicPanel } from '@/components/basic-panel';
+import { MapPanelProvider } from '@/contexts/map-panel-context';
 
 export default function HomePage() {
   return (
@@ -23,7 +24,9 @@ export default function HomePage() {
           </div>
         </header>
         <div className="rounded-b-[20px]">
-          <BasicPanel />
+          <MapPanelProvider>
+            <BasicPanel />
+          </MapPanelProvider>
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export function Expander({
   className = 'gap-0',
   itemClassName = '',
   triggerClassName = 'px-0 py-2 text-white/60',
-  contentClassName = 'px-0 pb-3',
+  contentClassName = 'px-0 pt-4',
 }: {
   items: ExpanderItem[];
   className?: string;
@@ -46,10 +46,10 @@ export function Expander({
   ][lvl];
 
   const contentPadByDepth = [
-    'px-4 pb-3', // level 0
-    'px-3 pb-3', // level 1
-    'px-3 pb-2', // level 2
-    'px-3 pb-2', // level 3+
+    'px-4 pb-0', // level 0
+    'px-3 pb-0', // level 1
+    'px-3 pb-0', // level 2
+    'px-3 pb-0', // level 3+
   ][lvl];
 
   return (

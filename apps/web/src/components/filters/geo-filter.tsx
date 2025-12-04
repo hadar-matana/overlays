@@ -12,6 +12,7 @@ export const GeoFilter: FunctionComponent<GeoFilterProps> = ({
 }: GeoFilterProps) => {
   return (
     <Expander
+      contentClassName="px-3.5 pt-3.5"
       items={[{
         id: 'areas',
         header: 'אזורים',
