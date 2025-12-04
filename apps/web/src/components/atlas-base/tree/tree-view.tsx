@@ -265,7 +265,7 @@ export const TreeView: FC<TreeViewProps> = ({
 
   return (
     <TreeViewContext.Provider value={treeContextValue}>
-      <div className='text-sm bg-gradient-to-b from-[#080A23] to-[#141529] text-[#FFFFFFE0] flex flex-col items-stretch w-full'>
+      <div className='text-sm text-[#FFFFFFE0] flex flex-col items-stretch w-full'>
         {treeData.filter(node => node.isDisplayed !== false).map(node => (
           <TreeNodeItem key={node.id} node={node} level={0} treeData={treeData} />
         ))}
@@ -275,3 +275,4 @@ export const TreeView: FC<TreeViewProps> = ({
 };
 
 export default TreeView;
+

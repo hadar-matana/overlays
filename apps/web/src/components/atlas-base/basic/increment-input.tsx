@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../lib/utils';
 
 export interface IncrementInputProps
   extends Omit<React.ComponentProps<'input'>, 'type' | 'value' | 'onChange'> {
@@ -21,18 +21,33 @@ export const IncrementInput = ({
   className,
   ...props
 }: IncrementInputProps) => {
-  const canDecrement = value > min;
+  const [inputValue, setInputValue] = React.useState<string>(value.toString());
 
-  const handleIncrement = () => {
-    let next = value + step;
-    if (max !== undefined) next = Math.min(max, next);
-    onChange(next);
+  React.useEffect(() => {
+    setInputValue(value.toString());
+  }, [value]);
+
+  const setValue = (newValue: number) => {
+    onChange(Math.max(min, max !== undefined ? Math.min(max, newValue) : newValue));
   };
 
-  const handleDecrement = () => {
-    let next = value - step;
-    if (next < min) return;
-    onChange(next);
+  const handleIncrement = () => setValue(value + step);
+  const handleDecrement = () => value - step >= min && setValue(value - step);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    if (val === '' || val === '-' || !isNaN(Number(val))) {
+      setInputValue(val);
+    }
+  };
+
+  const handleInputBlur = () => {
+    const num = Number(inputValue);
+    if (isNaN(num) || inputValue.trim() === '') {
+      setInputValue(value.toString());
+    } else {
+      setValue(num);
+    }
   };
 
   return (
@@ -40,7 +55,7 @@ export const IncrementInput = ({
       dir="ltr" 
       tabIndex={0}
       className={cn(
-        'inline-flex h-[30px] items-stretch overflow-hidden',
+        'inline-flex h-8 w-1/4 items-stretch overflow-hidden',
         'rounded-[7px] border border-[#434343] bg-[#26292F]',
         'text-[14px] leading-[22px] text-white',
         'focus-within:border-[#1FC5A8] focus:border-[#1FC5A8] focus:outline-none',
@@ -58,21 +73,29 @@ export const IncrementInput = ({
         <button
           type="button"
           onClick={handleDecrement}
-          disabled={!canDecrement}
+          disabled={value <= min}
           className={cn(
             'flex flex-1 items-center justify-center bg-transparent',
-            !canDecrement && 'opacity-40 cursor-default',
+            value <= min && 'opacity-40 cursor-default',
           )}
         >
           <ChevronDownIcon className="h-3 w-3" strokeWidth={2} />
         </button>
       </div>
 
-      {/* number */}
       <div className="flex flex-1 items-center justify-center px-2">
-        <input {...props} type="hidden" value={value} readOnly />
-        <span className="tabular-nums">{value}</span>
+        <input
+          {...props}
+          type="text"
+          inputMode="numeric"
+          value={inputValue}
+          onChange={handleInputChange}
+          onBlur={handleInputBlur}
+          onKeyDown={(e) => e.key === 'Enter' && e.currentTarget.blur()}
+          className="w-full text-center bg-transparent border-none outline-none tabular-nums text-white"
+        />
       </div>
     </div>
   );
 };
+

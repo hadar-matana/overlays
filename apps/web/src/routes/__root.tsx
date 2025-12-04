@@ -1,6 +1,5 @@
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
-import { AppHeader } from '@/components/app-header';
 import { Toaster } from '@zohan/ui/components/sonner';
 
 interface AuthState {
@@ -17,7 +16,6 @@ interface MyRouterContext {
 function RootComponent() {
   return (
     <>
-      <AppHeader />
       <div className="p-4">
         <Outlet />
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, type FunctionComponent } from 'react';
 import TreeView, { type TreeNode } from './tree-view';
-import SearchInput from './search-input';
+import SearchInput from '../basic/search-input';
 import { treeFilterService } from './tree-filter-service';
 
 interface TreeWithFilterProps {
@@ -25,7 +25,7 @@ export const TreeWithFilter: FunctionComponent<TreeWithFilterProps> = ({
   }, [searchQuery, tree]);
 
   return (
-    <div className={`w-[293px] p-4`}>
+    <div>
       <div className="mb-4">
         <SearchInput
           searchValue={searchQuery}
@@ -47,3 +47,4 @@ export const TreeWithFilter: FunctionComponent<TreeWithFilterProps> = ({
 };
 
 export default TreeWithFilter;
+
